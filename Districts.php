@@ -64,32 +64,24 @@ class Districts
     function getKeywordByName($name) {
         global $db;
 
-        echo $name;
-
         $keyword = "";
         $result = "";
 
-        echo "<br />";
+        $name = $db->real_escape_string($name);
 
         if ($this->lang == 'uz') {
             $result = $db->query("SELECT * FROM `districts` WHERE uz='$name'");
-            echo 'ya tut uz';
         } elseif ($this->lang == 'ru') {
             $result = $db->query("SELECT * FROM `districts` WHERE ru='$name'");
-            echo 'ya tut ru';
         }
 
         $arr = $result->fetch_assoc();
-
-//        print_r($arr);
 
         if (isset($arr["keyword"])) {
 
             $keyword = $arr["keyword"];
 
         }
-
-//        echo $keyword;
 
         return $keyword;
     }

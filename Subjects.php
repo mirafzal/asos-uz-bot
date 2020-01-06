@@ -36,4 +36,27 @@ class Subjects
 
         return $districts;
     }
+
+    function getKeywordByName($name) {
+        global $db;
+
+        $keyword = "";
+        $result = "";
+
+        if ($this->lang == 'uz') {
+            $result = $db->query("SELECT * FROM `subjects` WHERE uz='$name'");
+        } elseif ($this->lang == 'ru') {
+            $result = $db->query("SELECT * FROM `subjects` WHERE ru='$name'");
+        }
+
+        $arr = $result->fetch_assoc();
+
+        if (isset($arr["keyword"])) {
+
+            $keyword = $arr["keyword"];
+
+        }
+
+        return $keyword;
+    }
 }
